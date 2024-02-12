@@ -4,8 +4,13 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.lab2.go</groupId>
-    <artifactId>server</artifactId>
+    <artifactId>todo</artifactId>
     <version>1.0.0</version>
+
+    <properties>
+        <base.target.name>todo</base.target.name>
+        <do.strip>true</do.strip>
+    </properties>
     <build>
         <sourceDirectory>${basedir}${file.separator}src</sourceDirectory>
         <testSourceDirectory>${basedir}${file.separator}src</testSourceDirectory>
@@ -16,17 +21,33 @@
                 <artifactId>mvn-golang-wrapper</artifactId>
                 <version>2.3.10</version>
                 <extensions>true</extensions>
+                <configuration>
+                    <goVersion>1.22.0</goVersion>
+                    <goBin>NONE</goBin>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>default-get</id>
+                        <id>default-build</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>build-for-linux64</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
                         <configuration>
+                            <strip>true</strip>
+                            <targetOs>linux</targetOs>
+                            <targetArch>amd64</targetArch>
+                            <resultName>${base.target.name}-linux-amd64</resultName>
+                            <strip>${do.strip}</strip>
                             <packages>
-                                <package>github.com/lib/pq</package>
-                                <package>github.com/mattn/go-sqlite3</package>
+                                <app>todo.go</app>
                             </packages>
                         </configuration>
                     </execution>
-                    <execution>
+
+                    <!-- <execution>
                         <id>default-run</id>
                         <goals>
                             <goal>run</goal>
@@ -36,18 +57,7 @@
                                 <package>todo.go</package>
                             </packages>
                         </configuration>
-                    </execution>
-                    <execution>
-                        <id>default-build</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                        <configuration>
-                            <packages>
-                                <package>todo.go</package>
-                            </packages>
-                        </configuration>
-                    </execution>
+                    </execution> -->
                     <execution>
                         <id>default-test</id>
                         <goals>
