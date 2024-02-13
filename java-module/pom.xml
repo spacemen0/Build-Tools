@@ -80,6 +80,22 @@
                     <mainClass>se.liu.ida.hello.HelloMaven</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.lab2.plugin</groupId>
+                <artifactId>run-server</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run-server</goal>
+                        </goals>
+                        <configuration>
+                            <executablePath>go-module/bin/server-win-amd64.exe</executablePath>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
