@@ -6,6 +6,7 @@
     <groupId>com.lab2.go</groupId>
     <artifactId>todo</artifactId>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
 
     <properties>
         <base.target.name>todo</base.target.name>
@@ -47,7 +48,7 @@
                         </configuration>
                     </execution>
 
-                    <!-- <execution>
+                    <execution>
                         <id>default-run</id>
                         <goals>
                             <goal>run</goal>
@@ -57,7 +58,7 @@
                                 <package>todo.go</package>
                             </packages>
                         </configuration>
-                    </execution> -->
+                    </execution>
                     <execution>
                         <id>default-test</id>
                         <goals>
