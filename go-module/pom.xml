@@ -38,9 +38,9 @@
                         </goals>
                         <configuration>
                             <strip>true</strip>
-                            <targetOs>linux</targetOs>
+                            <targetOs>windows</targetOs>
                             <targetArch>amd64</targetArch>
-                            <resultName>${base.target.name}-linux-amd64</resultName>
+                            <resultName>${base.target.name}-win-amd64.exe</resultName>
                             <strip>${do.strip}</strip>
                             <packages>
                                 <app>todo.go</app>
@@ -48,7 +48,7 @@
                         </configuration>
                     </execution>
 
-                    <execution>
+                    <!-- <execution>
                         <id>default-run</id>
                         <goals>
                             <goal>run</goal>
@@ -58,7 +58,7 @@
                                 <package>todo.go</package>
                             </packages>
                         </configuration>
-                    </execution>
+                    </execution> -->
                     <execution>
                         <id>default-test</id>
                         <goals>

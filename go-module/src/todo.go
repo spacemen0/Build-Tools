@@ -4,19 +4,15 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	_ "github.com/lib/pq"
-	_ "github.com/mattn/go-sqlite3"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
-)
 
-const (
-	databaseUser = "postgres"
-	databaseHost = "db"
-	databaseName = "postgres"
+	_ "github.com/lib/pq"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type Task struct {
@@ -72,7 +68,6 @@ func getURLParameter(path string) *string {
 func getLists(db *sql.DB, w http.ResponseWriter) []List {
 	rows, err := db.Query("select * from list")
 	CheckFatal(err, w)
-
 	// Retrieve all lists from the query
 	res := make([]List, 0)
 	for rows.Next() {
@@ -112,7 +107,7 @@ func insertList(db *sql.DB, listName string, w http.ResponseWriter) int {
 	var listId int
 	//err := db.QueryRow("insert into list (name) values ($1) returning id", listName).Scan(&listId)
 	_, err := db.Exec("insert into list (name) values ($1) ", listName)
-	 db.QueryRow("select last_insert_rowid()").Scan(&listId) // SQLite specific 
+	db.QueryRow("select last_insert_rowid()").Scan(&listId) // SQLite specific
 	CheckFatal(err, w)
 	return 0
 }
@@ -149,7 +144,7 @@ func (db *Database) listHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	} else if r.Method == "POST" {
 		// Parse the request and create a new list
-		body, err := ioutil.ReadAll(r.Body)
+		body, err := io.ReadAll(r.Body)
 		CheckFatal(err, w)
 		listRequest := ListCreateRequest{}
 		err = json.Unmarshal(body, &listRequest)
@@ -167,7 +162,7 @@ func (db *Database) listHandler(w http.ResponseWriter, r *http.Request) {
 // {"name": "taskName", "list_id": 123}
 func (db *Database) taskHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
-		body, err := ioutil.ReadAll(r.Body)
+		body, err := io.ReadAll(r.Body)
 		CheckFatal(err, w)
 		taskRequest := CreateTaskRequest{}
 		err = json.Unmarshal(body, &taskRequest)
@@ -189,9 +184,16 @@ func ConnectDb() *sql.DB {
 	db, err := sql.Open("sqlite3", "./foo.db")
 	if err != nil {
 		log.Fatal(err)
-}
-
-
+	}
+	sqlFile := "schema.sql"
+	sqlContent, err := os.ReadFile(sqlFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = db.Exec(string(sqlContent))
+	if err != nil {
+		log.Fatal(err)
+	}
 	return db
 }
 
