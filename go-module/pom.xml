@@ -43,9 +43,9 @@
                         </goals>
                         <configuration>
                             <strip>true</strip>
-                            <targetOs>windows</targetOs>
+                            <targetOs>linux</targetOs>
                             <targetArch>amd64</targetArch>
-                            <resultName>${base.target.name}-win-amd64.exe</resultName>
+                            <resultName>${base.target.name}-linux-amd64</resultName>
                             <strip>${do.strip}</strip>
                             <packages>
                                 <app>todo.go</app>
