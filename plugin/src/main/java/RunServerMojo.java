@@ -6,21 +6,36 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.IOException;
+import java.io.*;
 
-@Mojo(name = "run-server")
+@Mojo(name = "editLog4j2")
 public class RunServerMojo extends AbstractMojo {
 
-    @Parameter(property = "executablePath", required = true)
-    private String executablePath;
+    @Parameter(property = "propertiesPath", required = true)
+    private String propertiesPath;
+     @Parameter(property = "logPath", required = true)
+    private String logPath;
 
     public void execute() throws MojoExecutionException{
-        getLog().info("Running server executable: " + executablePath);
-        try {
-            Runtime runtime = Runtime.getRuntime();
-            Process process = runtime.exec(executablePath);
-        }
-        catch (IOException e) {
-            throw new MojoExecutionException("Error running server executable", e);
+try {
+            File file = new File(propertiesPath);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("log4j.appender.R.File=")) {
+                    line = "log4j.appender.R.File="+logPath;
+                }
+                stringBuilder.append(line).append("\n");
+            }
+            reader.close();
+
+            FileWriter writer = new FileWriter(file);
+            writer.write(stringBuilder.toString());
+            writer.close();
+        } catch (IOException e) {
+            throw new MojoExecutionException("Error: ", e);
         }
     }
 }
