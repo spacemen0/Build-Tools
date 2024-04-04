@@ -16,7 +16,8 @@ public class RunServerMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException{
         getLog().info("Running server executable: " + executablePath);
         try {
-            Runtime.getRuntime().exec(executablePath);
+            Runtime runtime = Runtime.getRuntime();
+            Process process = runtime.exec(executablePath);
         }
         catch (IOException e) {
             throw new MojoExecutionException("Error running server executable", e);

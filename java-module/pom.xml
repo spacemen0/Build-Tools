@@ -94,7 +94,7 @@
                             <goal>run-server</goal>
                         </goals>
                         <configuration>
-                            <executablePath>go-module/bin/server-win-amd64.exe</executablePath>
+                            <executablePath>go-module/bin/server-linux-amd64</executablePath>
                         </configuration>
                     </execution>
                 </executions>

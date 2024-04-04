@@ -7,7 +7,7 @@
     <artifactId>build-tools</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>Multi Chapter Simple Parent Project</name>
+    <name>Lab2 Build-Tools</name>
 
     <modules>
         <module>go-module</module>
