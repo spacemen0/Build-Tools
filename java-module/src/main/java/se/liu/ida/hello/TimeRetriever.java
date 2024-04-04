@@ -12,7 +12,7 @@ public class TimeRetriever {
         LocalTime localTime = new LocalTime();
         LoggerContext context = (LoggerContext) LogManager.getContext(false);
         Configuration config = context.getConfiguration();
-        logger.error("Configuration Source: " + config.getConfigurationSource().toString());
+        logger.info("Configuration Source: " + config.getConfigurationSource().toString());
         logger.info("Requested time string: " + localTime.toString());
         return "TODO list: " + localTime.toString();
     }
