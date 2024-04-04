@@ -13,19 +13,18 @@ public class RunServerMojo extends AbstractMojo {
 
     @Parameter(property = "propertiesPath", required = true)
     private String propertiesPath;
-     @Parameter(property = "logPath", required = true)
+    @Parameter(property = "logPath", required = true)
     private String logPath;
 
-    public void execute() throws MojoExecutionException{
-try {
+    public void execute() throws MojoExecutionException {
+        try {
             File file = new File(propertiesPath);
             BufferedReader reader = new BufferedReader(new FileReader(file));
             StringBuilder stringBuilder = new StringBuilder();
             String line;
-
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("log4j.appender.R.File=")) {
-                    line = "log4j.appender.R.File="+logPath;
+                    line = "log4j.appender.R.File=" + logPath;
                 }
                 stringBuilder.append(line).append("\n");
             }
