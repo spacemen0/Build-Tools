@@ -23,8 +23,8 @@ public class RunServerMojo extends AbstractMojo {
             StringBuilder stringBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("log4j.appender.R.File=")) {
-                    line = "log4j.appender.R.File=" + logPath;
+                if (line.startsWith("appender.R.fileName = ")) {
+                    line = "appender.R.fileName = " + logPath;
                 }
                 stringBuilder.append(line).append("\n");
             }
