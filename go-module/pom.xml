@@ -32,10 +32,6 @@
                     <goBin>NONE</goBin>
                 </configuration>
                 <executions>
-                    <!-- <execution>
-                        <id>default-build</id>
-                        <phase>none</phase>
-                    </execution> -->
                     <execution>
                         <id>build-for-linux64</id>
                         <goals>
@@ -62,7 +58,6 @@
                             <packages>
                                 <package>todo_test.go</package>
                                 <package>todo.go</package>
-
                             </packages>
                         </configuration>
                     </execution>
