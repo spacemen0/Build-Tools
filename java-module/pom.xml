@@ -59,7 +59,7 @@
                         <version>1.0.0</version>
                         <executions>
                             <execution>
-                                <phase>compile</phase>
+                                <phase>validate</phase>
                                 <goals>
                                     <goal>editLog4j2</goal>
                                 </goals>
@@ -85,7 +85,7 @@
                         <version>1.0.0</version>
                         <executions>
                             <execution>
-                                <phase>compile</phase>
+                                <phase>validate</phase>
                                 <goals>
                                     <goal>editLog4j2</goal>
                                 </goals>

@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.*;
 
 @Mojo(name = "editLog4j2")
-public class RunServerMojo extends AbstractMojo {
+public class EditLog4jMojo extends AbstractMojo {
 
     @Parameter(property = "propertiesPath", required = true)
     private String propertiesPath;
